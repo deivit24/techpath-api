@@ -1,6 +1,8 @@
 # RESTful Techpath API
 
-Techpath API.
+Techpath API. This repo will serve as the backend to [Techpath Vue3](https://github.com/deivit24/techpath). The frontend is currently deployed on [Netlify](https://adorable-bunny-ce0554.netlify.app/)
+
+Goal is to create a backend where users will be able to save tools they choose. Also want to create a dashboard of where they are now in their tech career and what is the going salary
 
 ## Table of Contents
 
@@ -378,7 +380,6 @@ To modify the ESLint configuration, update the `.eslintrc.json` file. To modify 
 To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.
 
 To maintain a consistent coding style across different IDEs, the project contains `.editorconfig`
-
 
 ## License
 
