@@ -18,7 +18,6 @@ Goal is to create a backend where users will be able to save tools they choose. 
 - [Logging](#logging)
 - [Custom Mongoose Plugins](#custom-mongoose-plugins)
 - [Linting](#linting)
-- [Contributing](#contributing)
 
 ## Features
 
