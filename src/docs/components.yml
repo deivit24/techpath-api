@@ -24,8 +24,8 @@ components:
       properties:
         id:
           type: string
-        id:
-          name: string
+        name:
+          type: string
         experience:
           type: number
         type:
