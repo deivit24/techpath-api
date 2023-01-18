@@ -2,7 +2,7 @@
 
 Techpath API. This repo will serve as the backend to [Techpath Vue3](https://github.com/deivit24/techpath). The frontend is currently deployed on [Netlify](https://adorable-bunny-ce0554.netlify.app/)
 
-Goal is to create a backend where users will be able to save tools they choose. Also want to create a dashboard of where they are now in their tech career and what is the going salary
+Goal is to create a backend where users will be able to save tools they choose. Also want to create a dashboard to show users where they are now in their tech career, where they want to be, how to to get there, and what is the going salary.
 
 ## Table of Contents
 
@@ -167,6 +167,10 @@ List of available routes:
 `GET /v1/users/:userId` - get user\
 `PATCH /v1/users/:userId` - update user\
 `DELETE /v1/users/:userId` - delete user
+
+**Tool routes**:\
+`POST /v1/tools` - Create a tool for signed in user\
+`GET /v1/tools` - get all tools for signed in user\
 
 ## Error Handling
 
