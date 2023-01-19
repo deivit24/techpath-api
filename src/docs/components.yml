@@ -26,18 +26,13 @@ components:
           type: string
         name:
           type: string
-        experience:
-          type: number
         type:
-          type: string
+          type: array
           enum: [FRONTEND, BACKEND, DEVOPS]
-        user: string
       example:
         id: 5ebac534954b54139806c112
         name: Vue
-        type: FRONTEND
-        experience: 5
-        user: mnb123vcx456
+        type: [FRONTEND]
 
     Token:
       type: object

@@ -9,8 +9,10 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('self'), validate(toolValidation.createTool), toolController.createTool)
-  .get(auth('self'), toolController.getTools);
+  .post(auth('manageTools'), validate(toolValidation.createTool), toolController.createTool)
+  .get(toolController.getTools);
+
+router.route('/:toolId/user/:userId').post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool);
 
 module.exports = router;
 
@@ -39,23 +41,16 @@ module.exports = router;
  *             required:
  *               - name
  *               - type
- *               - experience
- *               - user
  *             properties:
  *               name:
  *                 type: string
  *               type:
- *                 type: string
+ *                 type: array
  *                 enum: [FRONTEND, BACKEND, DEVOPS]
- *               experience:
- *                 type: number
- *               user:
- *                  type: string
  *             example:
  *               name: Vue
- *               type: FRONTEND
- *               experience: 5
- *               user: poiuy1234uytr
+ *               type: [FRONTEND]
+
  *     responses:
  *       "201":
  *         description: Created
