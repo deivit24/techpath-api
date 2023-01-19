@@ -3,23 +3,20 @@ const { toJSON } = require('./plugins');
 const { toolTypes } = require('../config/tools');
 const toolSchema = mongoose.Schema(
   {
-    user: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'User',
-      required: true,
-    },
     name: {
       type: String,
       required: true,
     },
-    experience: {
-      type: Number,
+    imageUrl: {
+      type: String,
       required: true,
     },
-    type: {
-      type: String,
-      enum: [toolTypes.FRONTEND, toolTypes.BACKEND, toolTypes.DEVOPS],
-    },
+    type: [
+      {
+        type: String,
+        enum: [toolTypes.FRONTEND, toolTypes.BACKEND, toolTypes.DEVOPS],
+      },
+    ],
   },
   {
     timestamps: true,
@@ -30,12 +27,11 @@ toolSchema.plugin(toJSON);
 
 /**
  * Check if tool exists
- * @param {string} name - The user's email
- * @param {ObjectId} [user] - The id of the user to be excluded
+ * @param {string} name - The tool's name
  * @returns {Promise<boolean>}
  */
-toolSchema.statics.doesToolExist = async function (name, user) {
-  const tool = await this.findOne({ name, user });
+toolSchema.statics.doesToolExist = async function (name) {
+  const tool = await this.findOne({ name });
   return !!tool;
 };
 
