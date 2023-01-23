@@ -47,12 +47,52 @@ const getTools = async () => {
   return tools;
 };
 
+/**
+ * Get tool by id
+ * @param {ObjectId} toolId
+ * @returns {Promise<Tool>}
+ */
+const getTool = async (toolId) => {
+  const tool = await Tool.findById(toolId);
+  if (!tool) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Tool not found');
+  }
+  return tool;
+};
+
+/**
+ * Update tool by user id
+ * @param {ObjectId} toolId
+ * @param {Object} updateBody
+ * @returns {Promise<Tool>}
+ */
+const updateToolById = async (toolId, updateBody) => {
+  const tool = await getTool(toolId);
+  Object.assign(tool, updateBody);
+  await tool.save();
+  return tool;
+};
+
+/**
+ * Delete tool by id
+ * @param {ObjectId} toolId
+ * @returns {Promise<Tool>}
+ */
+const deleteToolById = async (toolId) => {
+  const tool = await getTool(toolId);
+  await tool.remove();
+  return tool;
+};
+
 const getUserTools = async (userId) => {
   const tools = await ToolUser.find({ user: userId });
   return tools;
 };
 module.exports = {
   createTool,
+  getTool,
+  updateToolById,
   getTools,
+  deleteToolById,
   createUserTool,
 };
