@@ -6,10 +6,19 @@ const toolSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     imageUrl: {
       type: String,
-      required: true,
+      required: false,
+    },
+    color: {
+      type: String,
+      required: false,
+    },
+    description: {
+      type: String,
+      required: false,
     },
     type: [
       {
