@@ -23,7 +23,15 @@ const toolSchema = mongoose.Schema(
     type: [
       {
         type: String,
-        enum: [toolTypes.FRONTEND, toolTypes.BACKEND, toolTypes.DEVOPS],
+        enum: [
+          toolTypes.FRONTEND,
+          toolTypes.BACKEND,
+          toolTypes.DEVOPS,
+          toolTypes.DATABASE,
+          toolTypes.EMBEDDED,
+          toolTypes.GAME,
+          toolTypes.QA,
+        ],
       },
     ],
   },
