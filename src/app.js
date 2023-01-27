@@ -13,7 +13,8 @@ const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
-
+const { Tool } = require('./models');
+const seed = require('./utils/seed');
 const app = express();
 
 if (config.env !== 'test') {
@@ -63,5 +64,16 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
+if (config.env === 'development') {
+  Tool.find()
+    .then((data) => {
+      if (data.length === 0) seed();
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  // seed()
+}
 
 module.exports = app;

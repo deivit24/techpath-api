@@ -6,7 +6,19 @@ const createTool = {
   body: Joi.object().keys({
     name: Joi.string().required(),
     imageUrl: Joi.string(),
-    type: Joi.array().items(Joi.string().required().valid(toolTypes.FRONTEND, toolTypes.BACKEND, toolTypes.DEVOPS)),
+    type: Joi.array().items(
+      Joi.string()
+        .required()
+        .valid(
+          toolTypes.FRONTEND,
+          toolTypes.BACKEND,
+          toolTypes.DEVOPS,
+          toolTypes.DATABASE,
+          toolTypes.EMBEDDED,
+          toolTypes.GAME,
+          toolTypes.QA
+        )
+    ),
   }),
 };
 
@@ -32,7 +44,17 @@ const updateTool = {
       description: Joi.string(),
       imageUrl: Joi.string(),
       color: Joi.string(),
-      type: Joi.array().items(Joi.string().valid(toolTypes.FRONTEND, toolTypes.BACKEND, toolTypes.DEVOPS)),
+      type: Joi.array().items(
+        Joi.string().valid(
+          toolTypes.FRONTEND,
+          toolTypes.BACKEND,
+          toolTypes.DEVOPS,
+          toolTypes.DATABASE,
+          toolTypes.EMBEDDED,
+          toolTypes.GAME,
+          toolTypes.QA
+        )
+      ),
     })
     .min(1),
 };
