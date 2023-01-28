@@ -12,13 +12,18 @@ router
   .post(auth('manageTools'), validate(toolValidation.createTool), toolController.createTool)
   .get(toolController.getTools);
 
+router.route('/user').get(auth(), toolController.getUserTools);
+
 router
   .route('/:toolId')
   .get(validate(toolValidation.getTool), toolController.getTool)
   .patch(auth('manageTools'), validate(toolValidation.updateTool), toolController.updateTool)
   .delete(auth('manageTools'), validate(toolValidation.deleteTool), toolController.deleteTool);
 
-router.route('/:toolId/user/:userId').post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool);
+router
+  .route('/:toolId/user')
+  .post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool)
+  .get(auth(), validate(toolValidation.getTool), toolController.getUserTool);
 
 module.exports = router;
 
@@ -47,16 +52,19 @@ module.exports = router;
  *             required:
  *               - name
  *               - type
+ *               - imageUrl
  *             properties:
  *               name:
  *                 type: string
  *               type:
  *                 type: array
  *                 enum: [FRONTEND, BACKEND, DEVOPS]
+ *               imageUrl:
+ *                 type: string
  *             example:
  *               name: Vue
  *               type: [FRONTEND]
-
+ *               imageUrl: "https://someimage.png"
  *     responses:
  *       "201":
  *         description: Created
@@ -71,10 +79,8 @@ module.exports = router;
  *
  *   get:
  *     summary: Get all tools pertaining to user
- *     description: Only retreives tools from logged in users.
+ *     description: Only retreives tools from logged in users
  *     tags: [Tools]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       "200":
  *         description: OK
@@ -168,8 +174,6 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/Tool'
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -199,5 +203,88 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /tools/{id}/user:
+ *   post:
+ *     summary: Create a User tool
+ *     description: Only logged in users can create user tool.
+ *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - experience
+ *             properties:
+ *               experience:
+ *                 type: number
+ *             example:
+ *               experience: 5
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/ToolUser'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *   get:
+ *     summary: Get a User Tool
+ *     description: Get a user tool tied to auth user
+ *     tags: [Tools]
+ *     parameters:
+ *       - in: path
+ *         name: toolId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Tool id
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/ToolUser'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  *
+ */
+
+/**
+ * @swagger
+ * /tools/user:
+ *   get:
+ *     summary: Gets all UserTools by authed user
+ *     description: Gets on user tools assiged by auth user id
+ *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/ToolUser'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

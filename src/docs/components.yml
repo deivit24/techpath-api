@@ -29,10 +29,34 @@ components:
         type:
           type: array
           enum: [FRONTEND, BACKEND, DEVOPS]
+        description:
+          type: string
+        imageUrl:
+          type: string
+        link:
+          type: string
+        color:
+          type: string
       example:
         id: 5ebac534954b54139806c112
         name: Vue
         type: [FRONTEND]
+        description: 'An approachable, performant and versatile framework for building web user interfaces.'
+        imageUrl: 'https://img.stackshare.io/service/3837/paeckCWC.png'
+        link: 'https://vuejs.org/'
+        color: '#3EB883'
+
+    ToolUser:
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          type: string
+        tool:
+          $ref: '#/components/schemas/Tool'
+        experience:
+          type: number
 
     Token:
       type: object

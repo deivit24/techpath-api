@@ -25,15 +25,11 @@ const createTool = async (toolBody) => {
  * @param {<User>} authId
  * @returns {Promise<ToolUser>}
  */
-const createUserTool = async (userToolBody, toolId, userId, authId) => {
-  if (authId != userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Cannot add tool to this user');
-  }
-
-  if (await ToolUser.doesUserToolExist(toolId, userId)) {
+const createUserTool = async (userToolBody, toolId, authId) => {
+  if (await ToolUser.doesUserToolExist(toolId, authId)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User already has this tool');
   }
-  userToolBody.user = userId;
+  userToolBody.user = authId;
   userToolBody.tool = toolId;
   return ToolUser.create(userToolBody);
 };
@@ -85,14 +81,22 @@ const deleteToolById = async (toolId) => {
 };
 
 const getUserTools = async (userId) => {
-  const tools = await ToolUser.find({ user: userId });
+  const tools = await ToolUser.find({ user: userId }).populate('tool', 'name color');
   return tools;
 };
+
+const getUserTool = async (toolId, userId) => {
+  const tool = await ToolUser.findOne({ user: userId, tool: toolId }).populate('tool');
+  return tool;
+};
+
 module.exports = {
   createTool,
   getTool,
   updateToolById,
   getTools,
+  getUserTools,
+  getUserTool,
   deleteToolById,
   createUserTool,
 };
