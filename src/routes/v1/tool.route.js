@@ -18,7 +18,7 @@ router
   .patch(auth('manageTools'), validate(toolValidation.updateTool), toolController.updateTool)
   .delete(auth('manageTools'), validate(toolValidation.deleteTool), toolController.deleteTool);
 
-router.route('/:toolId/user/:userId').post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool);
+router.route('/:toolId/user').post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool);
 
 module.exports = router;
 

@@ -25,15 +25,11 @@ const createTool = async (toolBody) => {
  * @param {<User>} authId
  * @returns {Promise<ToolUser>}
  */
-const createUserTool = async (userToolBody, toolId, userId, authId) => {
-  if (authId != userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Cannot add tool to this user');
-  }
-
-  if (await ToolUser.doesUserToolExist(toolId, userId)) {
+const createUserTool = async (userToolBody, toolId, authId) => {
+  if (await ToolUser.doesUserToolExist(toolId, authId)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User already has this tool');
   }
-  userToolBody.user = userId;
+  userToolBody.user = authId;
   userToolBody.tool = toolId;
   return ToolUser.create(userToolBody);
 };

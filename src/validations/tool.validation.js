@@ -61,7 +61,6 @@ const updateTool = {
 
 const createUserTool = {
   params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
     toolId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
