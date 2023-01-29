@@ -20,6 +20,10 @@ const toolSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    link: {
+      type: String,
+      required: false,
+    },
     type: [
       {
         type: String,

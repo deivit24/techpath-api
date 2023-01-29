@@ -81,14 +81,22 @@ const deleteToolById = async (toolId) => {
 };
 
 const getUserTools = async (userId) => {
-  const tools = await ToolUser.find({ user: userId });
+  const tools = await ToolUser.find({ user: userId }).populate('tool', 'name color');
   return tools;
 };
+
+const getUserTool = async (toolId, userId) => {
+  const tool = await ToolUser.findOne({ user: userId, tool: toolId }).populate('tool');
+  return tool;
+};
+
 module.exports = {
   createTool,
   getTool,
   updateToolById,
   getTools,
+  getUserTools,
+  getUserTool,
   deleteToolById,
   createUserTool,
 };
