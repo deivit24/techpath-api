@@ -4,3 +4,6 @@ services:
   node-app:
     container_name: node-app-dev
     command: yarn dev -L
+    volumes:
+    - ./:/usr/src/node-app
+    - /usr/src/node-app/node_modules
