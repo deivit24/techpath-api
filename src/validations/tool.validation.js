@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('./custom.validation');
+const { objectId, colorHex } = require('./custom.validation');
 const { toolTypes } = require('../config/tools');
 
 const createTool = {
@@ -43,7 +43,7 @@ const updateTool = {
       name: Joi.string(),
       description: Joi.string(),
       imageUrl: Joi.string(),
-      color: Joi.string(),
+      color: Joi.string().custom(colorHex),
       type: Joi.array().items(
         Joi.string().valid(
           toolTypes.FRONTEND,
