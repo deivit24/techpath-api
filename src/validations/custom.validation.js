@@ -4,7 +4,12 @@ const objectId = (value, helpers) => {
   }
   return value;
 };
-
+const colorHex = (value, helpers) => {
+  if (!value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+    return helpers.message('must be a valid HEX color');
+  }
+  return value;
+};
 const password = (value, helpers) => {
   if (value.length < 8) {
     return helpers.message('password must be at least 8 characters');
@@ -18,4 +23,5 @@ const password = (value, helpers) => {
 module.exports = {
   objectId,
   password,
+  colorHex,
 };
