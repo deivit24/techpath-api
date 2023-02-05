@@ -43,6 +43,7 @@ const updateTool = {
       name: Joi.string(),
       description: Joi.string(),
       imageUrl: Joi.string(),
+      link: Joi.string(),
       color: Joi.string().custom(colorHex),
       type: Joi.array().items(
         Joi.string().valid(
