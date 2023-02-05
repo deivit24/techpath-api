@@ -5,6 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
 const passport = require('passport');
+const imageUpload = require('express-fileupload');
 const httpStatus = require('http-status');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
@@ -15,6 +16,7 @@ const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 const { Tool } = require('./models');
 const seed = require('./utils/seed');
+const { createBucket } = require('./utils/s3');
 const app = express();
 
 if (config.env !== 'test') {
@@ -34,6 +36,9 @@ app.use(express.urlencoded({ extended: true }));
 // sanitize request data
 app.use(xss());
 app.use(mongoSanitize());
+
+// image upload
+app.use(imageUpload());
 
 // gzip compression
 app.use(compression());
@@ -72,8 +77,7 @@ if (config.env === 'development') {
     .catch((e) => {
       console.log(e);
     });
-
-  // seed()
 }
 
+createBucket();
 module.exports = app;
