@@ -3,7 +3,7 @@ const ApiError = require('../utils/ApiError');
 const { calculateFrontend } = require('../utils/calculations');
 const { Tool, ToolUser, User } = require('../models');
 const { loginUserWithEmailAndPassword } = require('./auth.service');
-const { uploadFile } = require('../utils/s3');
+const { uploadFile, deleteFile } = require('../utils/s3');
 const { log } = require('../config/logger');
 
 /**
@@ -99,6 +99,14 @@ const uploadToolImage = async (file, toolId) => {
   console.log(aws_url);
   return { imageUrl: aws_url };
 };
+
+const deleteFileImage = async (toolId) => {
+  const tool = await getTool(toolId);
+  console.log(tool.key())
+  const success = await deleteFile(tool.key());
+
+  return { message: success };
+};
 module.exports = {
   createTool,
   getTool,
@@ -109,4 +117,5 @@ module.exports = {
   deleteToolById,
   createUserTool,
   uploadToolImage,
+  deleteFileImage
 };

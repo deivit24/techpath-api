@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 const { toolTypes } = require('../config/tools');
+const config = require('../config/config');
 const toolSchema = mongoose.Schema(
   {
     name: {
@@ -54,6 +55,18 @@ toolSchema.plugin(toJSON);
 toolSchema.statics.doesToolExist = async function (name) {
   const tool = await this.findOne({ name });
   return !!tool;
+};
+
+/**
+ * returns key out of imageUrl
+ * @returns {Promise<string>}
+ */
+toolSchema.methods.key = function () {
+  const tool = this;
+  const uploads = 'uploads'
+  if (!tool.imageUrl.includes(config.aws.bucket)) return tool.imageUrl
+
+  return `${uploads}`+ tool.imageUrl.split(uploads)[1]
 };
 
 /**

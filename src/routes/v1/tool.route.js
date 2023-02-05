@@ -25,7 +25,10 @@ router
   .post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool)
   .get(auth(), validate(toolValidation.getTool), toolController.getUserTool);
 
-router.route('/:toolId/upload').post(toolController.uploadToolImage);
+router
+  .route('/:toolId/upload')
+  .post(auth('manageTools'), toolController.uploadToolImage)
+  .delete(auth('manageTools'), toolController.deleteFileImage)
 module.exports = router;
 
 /**
