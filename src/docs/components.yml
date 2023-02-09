@@ -58,6 +58,14 @@ components:
         experience:
           type: number
 
+    Upload:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+      example:
+        imageUrl: https://amazon.s3.bucketname.com/uploads/image.png
+
     Token:
       type: object
       properties:

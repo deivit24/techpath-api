@@ -4,7 +4,6 @@ const { calculateFrontend } = require('../utils/calculations');
 const { Tool, ToolUser, User } = require('../models');
 const { loginUserWithEmailAndPassword } = require('./auth.service');
 const { uploadFile, deleteFile } = require('../utils/s3');
-const { log } = require('../config/logger');
 
 /**
  * Create tool
@@ -92,17 +91,13 @@ const getUserTool = async (toolId, userId) => {
   return tool;
 };
 
-const uploadToolImage = async (file, toolId) => {
-  const tool = await getTool(toolId);
+const uploadToolImage = async (file) => {
   const aws_url = await uploadFile(file);
-  console.log(aws_url);
-  console.log(aws_url);
   return { imageUrl: aws_url };
 };
 
 const deleteFileImage = async (toolId) => {
   const tool = await getTool(toolId);
-  console.log(tool.key())
   const success = await deleteFile(tool.key());
 
   return { message: success };
