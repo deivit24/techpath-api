@@ -125,6 +125,15 @@ SMTP_PORT=587
 SMTP_USERNAME=madelyn63@ethereal.email
 SMTP_PASSWORD=vM7aQe9fq4HMw43cu2
 EMAIL_FROM=support@techpath.com
+
+# NODE Environment
+NODE_ENV=development
+
+# AWS config
+AWS_ACCESS_KEY_ID=yourawsaccesskey
+AWS_SECRET_ACCESS_KEY=yourawssecretkey
+AWS_REGION=us-west-2
+AWS_BUCKET_NAME=yourawsbucketname
 ```
 
 ## Project Structure
@@ -166,11 +175,19 @@ List of available routes:
 `GET /v1/users` - get all users\
 `GET /v1/users/:userId` - get user\
 `PATCH /v1/users/:userId` - update user\
-`DELETE /v1/users/:userId` - delete user
+`DELETE /v1/users/:userId` - delete user\
+`GET /v1/users/settings` - get user settings
 
 **Tool routes**:\
 `POST /v1/tools` - Create a tool for signed in user\
 `GET /v1/tools` - get all tools for signed in user\
+`GET /v1/tools/:toolId` - get tool\
+`PATCH /v1/tools/:toolId` - update tool\
+`DELETE /v1/tools/:toolId` - delete tool\
+`POST /v1/tools/:toolId/user` - create user tool\
+`GET /v1/tools/:toolId/user` - get user tool\
+`GET /v1/tools/user` - get all user tools\
+`POST /v1/tools/upload` - upload image to s3
 
 ## Error Handling
 
