@@ -39,6 +39,22 @@ const updateUser = {
     .min(1),
 };
 
+const updateUserSettings = {
+  body: Joi.object()
+    .keys({
+      darkMode: Joi.boolean(),
+      private: Joi.boolean(),
+      language: Joi.string().valid(
+              'ENGLISH',
+              'SPANISH',
+              ),
+      github: Joi.string(),
+      linkedin: Joi.string(),
+      avatar: Joi.string()
+    })
+    .min(1),
+};
+
 const deleteUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
@@ -51,4 +67,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  updateUserSettings
 };

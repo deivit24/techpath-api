@@ -92,6 +92,13 @@ const getUserSettings = async (authId) => {
  return userSettings
 }
 
+const updateUserSettings = async (updateBody, authId) => {
+  const userSettings = await UserSettings.findOne({user:authId})
+  Object.assign(userSettings, updateBody);
+  await userSettings.save();
+  return userSettings
+}
+
 module.exports = {
   createUser,
   queryUsers,
@@ -99,5 +106,6 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
-  getUserSettings
+  getUserSettings,
+  updateUserSettings
 };

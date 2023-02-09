@@ -11,7 +11,10 @@ router
   .post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
   .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
 
-router.route('/settings').get(auth(), userController.getUserSettings)
+router
+  .route('/settings')
+  .get(auth(), userController.getUserSettings)
+  .patch(auth(),validate(userValidation.updateUserSettings), userController.updateUserSettings)
 
 router
   .route('/:userId')
@@ -274,4 +277,24 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ *   patch:
+ *     summary: Update auth user settings
+ *     description: update logged in user settings
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/UserSettingsUpdate'
+ *     responses:
+*        "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/UserSettings'
+ *
  */
