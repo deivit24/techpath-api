@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User } = require('../models');
+const { User, UserSettings } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -79,6 +79,19 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+const getUserSettings = async (authId) => {
+  const user = await getUserById(authId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+ const userSettings = await UserSettings.findOne({user:authId})
+ if (!userSettings) {
+  return UserSettings.create({user: authId})
+ }
+ return userSettings
+}
+
 module.exports = {
   createUser,
   queryUsers,
@@ -86,4 +99,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  getUserSettings
 };

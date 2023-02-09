@@ -46,9 +46,11 @@ const refreshAuth = async (refreshToken) => {
     }
     await refreshTokenDoc.remove();
     const tokens = await tokenService.generateAuthTokens(user);
+    const settings = await userService.getUserSettings(user._id)
     const data = {
       tokens: tokens,
       user: user,
+      settings: settings
     };
     return data;
   } catch (error) {
