@@ -43,6 +43,24 @@ components:
         avatar: https://amazon.s3.bucket-name.com/avatar/me.jpeg
         private: true
 
+    UserSettingsUpdate:
+      type: object
+      properties:
+        darkMode:
+          type: boolean
+        language:
+          type: string
+          enum: [ENGLISH, SPANISH]
+        avatar:
+          type: string
+        private:
+          type: boolean
+      example:
+        darkMode: true
+        language: ENGLISH
+        avatar: https://amazon.s3.bucket-name.com/avatar/me.jpeg
+        private: true
+
     Tool:
       type: object
       properties:

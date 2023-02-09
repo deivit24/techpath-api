@@ -1,14 +1,12 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const { calculateFrontend } = require('../utils/calculations');
-const { Tool, ToolUser, User } = require('../models');
-const { loginUserWithEmailAndPassword } = require('./auth.service');
+const { Tool, ToolUser } = require('../models');
 const { uploadFile, deleteFile } = require('../utils/s3');
 
 /**
  * Create tool
  * @param {object} toolBody
- * @param {<User>} user
+ * @param {<Tool>} tool
  * @returns {Promise<Tool>}
  */
 const createTool = async (toolBody) => {
