@@ -15,6 +15,9 @@ router
 router.route('/user').get(auth(), toolController.getUserTools);
 
 router
+  .route('/upload')
+  .post(auth('manageTools'), toolController.uploadToolImage)
+router
   .route('/:toolId')
   .get(validate(toolValidation.getTool), toolController.getTool)
   .patch(auth('manageTools'), validate(toolValidation.updateTool), toolController.updateTool)
@@ -27,7 +30,6 @@ router
 
 router
   .route('/:toolId/upload')
-  .post(auth('manageTools'), toolController.uploadToolImage)
   .delete(auth('manageTools'), toolController.deleteFileImage)
 module.exports = router;
 
@@ -291,4 +293,34 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /tools/upload:
+ *   post:
+ *     summary: Uploads image file to AWS S3 bucket and returns imageUrl
+ *     description: Only admins can upload file to AWS S3 bucket
+ *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               files:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       "201":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Upload'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
  */

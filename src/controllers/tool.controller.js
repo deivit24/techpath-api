@@ -44,7 +44,7 @@ const createUserTool = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(userTool);
 });
 const uploadToolImage = catchAsync(async (req, res) => {
-  const toolUploaded = await toolService.uploadToolImage(req.files, req.params.toolId);
+  const toolUploaded = await toolService.uploadToolImage(req.files);
   res.status(httpStatus.CREATED).send(toolUploaded);
 });
 
