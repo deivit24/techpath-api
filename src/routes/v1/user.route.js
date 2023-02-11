@@ -17,6 +17,10 @@ router
   .patch(auth(),validate(userValidation.updateUserSettings), userController.updateUserSettings)
 
 router
+  .route('/settings/avatar')
+  .post(auth(), userController.uploadAvatar)
+
+router
   .route('/:userId')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)

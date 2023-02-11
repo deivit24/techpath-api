@@ -46,7 +46,7 @@ const refreshAuth = async (refreshToken) => {
     }
     await refreshTokenDoc.remove();
     const tokens = await tokenService.generateAuthTokens(user);
-    const settings = await userService.getUserSettings(user._id)
+    const settings = await userService.getUserSettings(user._id, 'avatar darkMode language')
     const data = {
       tokens: tokens,
       user: user,
