@@ -43,6 +43,11 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const uploadAvatar =catchAsync(async (req, res) => {
+  const avatarUploaded = await userService.uploadAvatar(req.files, req.user._id);
+  res.status(httpStatus.CREATED).send(avatarUploaded);
+});
+
 module.exports = {
   createUser,
   getUsers,
@@ -50,5 +55,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserSettings,
-  updateUserSettings
+  updateUserSettings,
+  uploadAvatar
 };

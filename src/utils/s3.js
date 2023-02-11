@@ -25,8 +25,8 @@ const createBucket = () => {
   });
 };
 
-const uploadFile = async (image) => {
-  const key = `uploads/${uuid.v4().slice(0, 8)}` + image.files.name.replace(/\s+/g, '-').toLowerCase();
+const uploadFile = async (image, bucketFolder = 'uploads') => {
+  const key = `${bucketFolder}/${uuid.v4().slice(0, 8)}` + image.files.name.replace(/\s+/g, '-').toLowerCase();
 
   const uploadParams = {
     Bucket: config.aws.bucket,
@@ -44,7 +44,6 @@ const uploadFile = async (image) => {
 
 
 const deleteFile = async (key) => {
-  console.log(key)
   const uploadParams = {
     Bucket: config.aws.bucket,
     Key: key,
