@@ -14,18 +14,15 @@ router
 router
   .route('/settings')
   .get(auth(), userController.getUserSettings)
-  .patch(auth(),validate(userValidation.updateUserSettings), userController.updateUserSettings)
+  .patch(auth(), validate(userValidation.updateUserSettings), userController.updateUserSettings);
 
-router
-  .route('/settings/avatar')
-  .post(auth(), userController.uploadAvatar)
+router.route('/settings/avatar').post(auth(), userController.uploadAvatar);
 
 router
   .route('/:userId')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
-
 
 module.exports = router;
 
