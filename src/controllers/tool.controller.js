@@ -1,9 +1,6 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
-const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { toolService } = require('../services');
-
 
 const createTool = catchAsync(async (req, res) => {
   const tool = await toolService.createTool(req.body);
@@ -49,7 +46,7 @@ const uploadToolImage = catchAsync(async (req, res) => {
 });
 
 const deleteFileImage = catchAsync(async (req, res) => {
-  const toolDeleted = await toolService.deleteFileImage(req.params.toolId);
+  await toolService.deleteFileImage(req.params.toolId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 module.exports = {
@@ -62,5 +59,5 @@ module.exports = {
   updateTool,
   createUserTool,
   uploadToolImage,
-  deleteFileImage
+  deleteFileImage,
 };

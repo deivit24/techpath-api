@@ -44,13 +44,10 @@ const updateUserSettings = {
     .keys({
       darkMode: Joi.boolean(),
       private: Joi.boolean(),
-      language: Joi.string().valid(
-              'ENGLISH',
-              'SPANISH',
-              ),
+      language: Joi.string().valid('ENGLISH', 'SPANISH'),
       github: Joi.string(),
       linkedin: Joi.string(),
-      avatar: Joi.string()
+      avatar: Joi.string(),
     })
     .min(1),
 };

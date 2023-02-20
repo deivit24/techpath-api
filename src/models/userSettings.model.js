@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
+
 const languageTypes = {
   ENGLISH: 'ENGLISH',
   SPANISH: 'SPANISH',
@@ -23,20 +24,20 @@ const userSettingsSchema = mongoose.Schema(
       default: 'ENGLISH',
     },
     avatar: {
-      type:String,
-      default: "https://ui-avatars.com/api/?name=TP"
+      type: String,
+      default: 'https://ui-avatars.com/api/?name=TP',
     },
-    private:{
+    private: {
       type: Boolean,
-      default: true
+      default: true,
     },
     github: {
       type: String,
-      required: false
+      required: false,
     },
     linkedin: {
       type: String,
-      required: false
+      required: false,
     },
   },
   {

@@ -30,7 +30,10 @@ const createUserTool = async (userToolBody, toolId, authId) => {
   }
   userToolBody.user = authId;
   userToolBody.tool = toolId;
-  return ToolUser.create(userToolBody);
+  let toolUser = await ToolUser.create(userToolBody);
+  toolUser = await toolUser.populate('tool', 'name color imageUrl').execPopulate();
+
+  return toolUser;
 };
 
 /**
@@ -38,8 +41,7 @@ const createUserTool = async (userToolBody, toolId, authId) => {
  * @returns {Promise<Tool>}
  */
 const getTools = async () => {
-  const tools = await Tool.find();
-  return tools;
+  return await Tool.find();
 };
 
 /**
@@ -80,8 +82,7 @@ const deleteToolById = async (toolId) => {
 };
 
 const getUserTools = async (userId) => {
-  const tools = await ToolUser.find({ user: userId }).populate('tool', 'name color');
-  return tools;
+  return await ToolUser.find({ user: userId }).populate('tool', 'name color imageUrl');
 };
 
 const getUserTool = async (toolId, userId) => {
@@ -90,8 +91,8 @@ const getUserTool = async (toolId, userId) => {
 };
 
 const uploadToolImage = async (file) => {
-  const aws_url = await uploadFile(file);
-  return { imageUrl: aws_url };
+  const awsUrl = await uploadFile(file);
+  return { imageUrl: awsUrl };
 };
 
 const deleteFileImage = async (toolId) => {
