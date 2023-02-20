@@ -1,6 +1,11 @@
 const Joi = require('joi');
 const { password, objectId } = require('./custom.validation');
-
+const learningTypes = {
+  BOOTCAMP: 'Bootcamp',
+  CSDEGREE: 'C.S. Degree',
+  SELFTAUGHTFREE: 'Self-taught Free',
+  ONLINEPAID: 'Online Paid Courses',
+};
 const createUser = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -40,16 +45,27 @@ const updateUser = {
 };
 
 const updateUserSettings = {
-  body: Joi.object()
-    .keys({
-      darkMode: Joi.boolean(),
-      private: Joi.boolean(),
-      language: Joi.string().valid('ENGLISH', 'SPANISH'),
-      github: Joi.string(),
-      linkedin: Joi.string(),
-      avatar: Joi.string(),
-    })
-    .min(1),
+  body: Joi.object().keys({
+    darkMode: Joi.boolean(),
+    private: Joi.boolean(),
+    student: Joi.boolean(),
+    employed: Joi.boolean(),
+    currentTitle: Joi.string().allow(''),
+    currentCompensation: Joi.number().allow(null),
+    language: Joi.string().valid('ENGLISH', 'SPANISH'),
+    github: Joi.string().allow(''),
+    linkedin: Joi.string().allow(''),
+    firstName: Joi.string().allow(''),
+    lastName: Joi.string().allow(''),
+    bio: Joi.string().allow(''),
+    learningMethod: Joi.string().valid(
+      learningTypes.BOOTCAMP,
+      learningTypes.CSDEGREE,
+      learningTypes.SELFTAUGHTFREE,
+      learningTypes.ONLINEPAID
+    ),
+    avatar: Joi.string(),
+  }),
 };
 
 const deleteUser = {

@@ -6,6 +6,13 @@ const languageTypes = {
   SPANISH: 'SPANISH',
 };
 
+const learningTypes = {
+  BOOTCAMP: 'Bootcamp',
+  CSDEGREE: 'C.S. Degree',
+  SELFTAUGHTFREE: 'Self-taught Free',
+  ONLINEPAID: 'Online Paid Courses',
+};
+
 const userSettingsSchema = mongoose.Schema(
   {
     user: {
@@ -17,6 +24,33 @@ const userSettingsSchema = mongoose.Schema(
       type: Boolean,
       required: false,
       default: true,
+    },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    employed: {
+      type: Boolean,
+      default: false,
+    },
+    currentCompensation: {
+      type: Number,
+    },
+    student: {
+      type: Boolean,
+      default: false,
+    },
+    bio: {
+      type: String,
+    },
+    learningMethod: {
+      type: String,
+      enum: [learningTypes.BOOTCAMP, learningTypes.CSDEGREE, learningTypes.SELFTAUGHTFREE, learningTypes.ONLINEPAID],
+    },
+    currentTitle: {
+      type: String,
     },
     language: {
       type: String,
