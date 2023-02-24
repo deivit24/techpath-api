@@ -71,10 +71,20 @@ const createUserTool = {
   }),
 };
 
+const updateUserTool = {
+  params: Joi.object().keys({
+    toolId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    experience: Joi.number().required(),
+  }),
+};
+
 module.exports = {
   createTool,
   getTool,
   updateTool,
   createUserTool,
   deleteTool,
+  updateUserTool
 };

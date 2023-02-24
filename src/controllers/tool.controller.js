@@ -40,6 +40,10 @@ const createUserTool = catchAsync(async (req, res) => {
   const userTool = await toolService.createUserTool(req.body, req.params.toolId, req.user._id);
   res.status(httpStatus.CREATED).send(userTool);
 });
+const updateUserTool = catchAsync(async (req, res) => {
+  const userUpdateTool = await toolService.updateUserToolById(req.body, req.params.toolId, req.user._id)
+  res.status(httpStatus.OK).send(userUpdateTool);
+})
 const uploadToolImage = catchAsync(async (req, res) => {
   const toolUploaded = await toolService.uploadToolImage(req.files);
   res.status(httpStatus.CREATED).send(toolUploaded);
@@ -60,4 +64,5 @@ module.exports = {
   createUserTool,
   uploadToolImage,
   deleteFileImage,
+  updateUserTool,
 };
