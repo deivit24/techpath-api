@@ -26,7 +26,8 @@ router
 router
   .route('/:toolId/user')
   .post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool)
-  .get(auth(), validate(toolValidation.getTool), toolController.getUserTool);
+  .get(auth(), validate(toolValidation.getTool), toolController.getUserTool)
+  .patch(auth(), validate(toolValidation.updateUserTool), toolController.updateUserTool);
 
 router
   .route('/:toolId/upload')
@@ -214,6 +215,36 @@ module.exports = router;
 /**
  * @swagger
  * /tools/{id}/user:
+ *   patch:
+ *     summary: Update a User tool
+ *     description: Only logged in users can create user tool.
+ *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - experience
+ *             properties:
+ *               experience:
+ *                 type: number
+ *             example:
+ *               experience: 5
+ *     responses:
+ *       "200":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/ToolUser'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
  *   post:
  *     summary: Create a User tool
  *     description: Only logged in users can create user tool.

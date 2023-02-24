@@ -71,6 +71,20 @@ const updateToolById = async (toolId, updateBody) => {
 };
 
 /**
+ * Update user tool by user & tool id
+ * @param {ObjectId} toolId
+ * @param {ObjectId} userId
+ * @param {Object} updateBody
+ * @returns {Promise<Tool>}
+ */
+const updateUserToolById = async (updateBody, toolId, userId) => {
+  const userTool = await getUserTool(toolId, userId);
+  Object.assign(userTool, updateBody);
+  await userTool.save();
+  return userTool;
+}
+
+/**
  * Delete tool by id
  * @param {ObjectId} toolId
  * @returns {Promise<Tool>}
@@ -111,5 +125,6 @@ module.exports = {
   deleteToolById,
   createUserTool,
   uploadToolImage,
-  deleteFileImage
+  deleteFileImage,
+  updateUserToolById
 };
