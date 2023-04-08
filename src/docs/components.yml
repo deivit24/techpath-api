@@ -1,5 +1,21 @@
 components:
   schemas:
+    CareerMetrics:
+      type: object
+      properties:
+        frontend:
+          type: number
+        backend:
+          type: number
+        fullstack:
+          type: number
+        devops:
+          type: number
+      example:
+        frontend: 50
+        backend: 60
+        fullstack: 55
+        devops: 30
     User:
       type: object
       properties:
