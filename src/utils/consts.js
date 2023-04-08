@@ -1,6 +1,6 @@
 const UI = ['HTML', 'CSS'];
 const FRONTENDLANGUAGE = ['JAVASCRIPT', 'TYPESCRIPT'];
-const FRONTENDFRAMEWORK = ['REACT', 'VUE', 'ANGULAR', 'EMBER', 'SVELTE'];
+const FRONTENDFRAMEWORK = ['REACT.JS', 'VUE.JS', 'ANGULAR', 'EMBER.JS', 'SVELTE'];
 
 const BACKENDLANGUAGE = ['PYTHON', 'NODEJS', 'PHP', 'GO', 'JAVA', 'RUBY', '.NET', 'LUA', 'C', 'C++', 'RUST', 'HASKELL'];
 const BACKENDFRAMEWORK = ['FLASK', 'DJANGO', 'EXPRESS', 'FASTAPI', 'SPRING BOOT', 'LARAVEL', 'RAILS', '.NET CORE'];
@@ -54,6 +54,17 @@ const weightedAverageScore = (score, wa) => {
   return score * wa;
 };
 
+/**
+ * Function that calculates sum
+ * @param {Number} arr array of numners
+ * @returns {Number}
+ */
+const getSum = (arr) => {
+  return arr.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+};
+
 module.exports = {
   UI,
   FRONTENDLANGUAGE,
@@ -85,4 +96,5 @@ module.exports = {
   TESTWEIGHT,
   getAverage,
   weightedAverageScore,
+  getSum
 };
