@@ -104,6 +104,15 @@ const getUserTool = async (toolId, userId) => {
   return tool;
 };
 
+const deleteUserTool = async (toolId, userId) => {
+  const tool = await ToolUser.findOne({ user: userId, tool: toolId }).populate('tool');
+  if (!tool) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'This user does not have this tool');
+  }
+  await tool.remove();
+  return tool;
+};
+
 const uploadToolImage = async (file) => {
   const awsUrl = await uploadFile(file);
   return { imageUrl: awsUrl };
@@ -122,6 +131,7 @@ module.exports = {
   getTools,
   getUserTools,
   getUserTool,
+  deleteUserTool,
   deleteToolById,
   createUserTool,
   uploadToolImage,
