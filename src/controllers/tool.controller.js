@@ -22,6 +22,11 @@ const getUserTool = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(result);
 });
 
+const deleteUserTool = catchAsync(async (req, res) => {
+  const result = await toolService.deleteUserTool(req.params.toolId, req.user._id);
+  res.status(httpStatus.OK).send(result);
+});
+
 const getTool = catchAsync(async (req, res) => {
   const result = await toolService.getTool(req.params.toolId);
   res.status(httpStatus.OK).send(result);
@@ -58,6 +63,7 @@ module.exports = {
   getTools,
   getUserTools,
   getUserTool,
+  deleteUserTool,
   getTool,
   deleteTool,
   updateTool,

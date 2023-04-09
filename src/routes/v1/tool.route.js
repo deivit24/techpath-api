@@ -27,7 +27,8 @@ router
   .route('/:toolId/user')
   .post(auth(), validate(toolValidation.createUserTool), toolController.createUserTool)
   .get(auth(), validate(toolValidation.getTool), toolController.getUserTool)
-  .patch(auth(), validate(toolValidation.updateUserTool), toolController.updateUserTool);
+  .patch(auth(), validate(toolValidation.updateUserTool), toolController.updateUserTool)
+  .delete(auth(), validate(toolValidation.getTool), toolController.deleteUserTool)
 
 router
   .route('/:toolId/upload')
@@ -251,6 +252,13 @@ module.exports = router;
  *     tags: [Tools]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Tool id
  *     requestBody:
  *       required: true
  *       content:
@@ -279,6 +287,8 @@ module.exports = router;
  *     summary: Get a User Tool
  *     description: Get a user tool tied to auth user
  *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: toolId
@@ -300,6 +310,32 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
+ *   delete:
+ *     summary: Delete a User Tool
+ *     description: Delete a user tool tied to auth user
+ *     tags: [Tools]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Tool id
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/ToolUser'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
 
 /**
