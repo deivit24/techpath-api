@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const toolRoute = require('./tool.route');
 const careerRoute = require('./career.route');
+const jobRoute = require('./job.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -24,6 +25,10 @@ const defaultRoutes = [
   {
     path: '/tools',
     route: toolRoute,
+  },
+  {
+    path: '/jobs',
+    route: jobRoute,
   },
 ];
 
