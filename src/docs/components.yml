@@ -16,6 +16,23 @@ components:
         backend: 60
         fullstack: 55
         devops: 30
+    Job:
+      type: object
+      properties:
+        name:
+          type: string
+        min:
+          type: number
+        max:
+          type: number
+        average:
+          type: number
+      example:
+        name: "Software Engineer"
+        min: 90000
+        max: 220000
+        average: 140000
+
     User:
       type: object
       properties:

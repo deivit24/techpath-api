@@ -1,4 +1,4 @@
-const { Tool, ToolUser, User } = require('../models');
+const { Tool, ToolUser, User, Job } = require('../models');
 const FRONTEND = [
   {
     name: 'Vue.js',
@@ -384,12 +384,135 @@ const DATABASE = [
   },
 ];
 
+const JOBS = [
+  {
+    name: "Junior Frontend Engineer",
+    min: 76000,
+    max: 119000,
+    average: 94728,
+  },
+  {
+    name: "Frontend Engineer",
+    min: 104000,
+    max: 163000,
+    average: 129271,
+  },
+  {
+    name: "Senior Frontend Engineer",
+    min: 125000,
+    max: 193000,
+    average: 154106,
+  },
+  {
+    name: "Lead Frontend Engineer",
+    min: 112000,
+    max: 181000,
+    average: 141665,
+  },
+  {
+    name: "Principal Frontend Engineer",
+    min: 156000,
+    max: 249000,
+    average: 195442,
+  },
+  {
+    name: "Junior Backend Engineer",
+    min: 81000,
+    max: 131000,
+    average: 102422,
+  },
+  {
+    name: "Backend Engineer",
+    min: 115000,
+    max: 185000,
+    average: 144823,
+  },
+  {
+    name: "Senior Backend Engineer",
+    min: 130000,
+    max: 213000,
+    average: 165230,
+  },
+  {
+    name: "Lead Backend Engineer",
+    min: 116000,
+    max: 197000,
+    average: 150456,
+  },
+  {
+    name: "Junior Fullstack Software Engineer",
+    min: 73000,
+    max: 116000,
+    average: 91919,
+  },
+  {
+    name: "Fullstack Software Engineer",
+    min: 95000,
+    max: 120938,
+    average: 156000,
+  },
+  {
+    name: "Senior Fullstack Engineer",
+    min: 131000,
+    max: 209000,
+    average: 164458,
+  },
+  {
+    name: "Lead Fullstack Software Engineer",
+    min: 116000,
+    max: 149733,
+    average: 196000,
+  },
+  {
+    name: "Principal Fullstack Software Engineer",
+    min: 145000,
+    max: 246000,
+    average: 187386,
+  },
+  {
+    name: "Engineering Manager",
+    min: 170000,
+    max: 284000,
+    average: 217909,
+  },
+  {
+    name: "Staff Software Engineer",
+    min: 145000,
+    max: 181865,
+    average: 231000,
+  },
+  {
+    name: "VP of Engineering",
+    min: 217000,
+    max: 382000,
+    average: 285120,
+  },
+  {
+    name: "Chief Architect",
+    min: 228000,
+    max: 404000,
+    average: 299918,
+  },
+  {
+    name: "Chief Technology Officer (CTO)",
+    min: 251000,
+    max: 461000,
+    average: 334661,
+  },
+]
 const TOOLS = [...BACKEND, ...FRONTEND, ...DATABASE, ...DEVOPS];
 TOOLS.sort((a, b) => a.name.localeCompare(b.name));
 const seed = () => {
   Tool.insertMany(TOOLS)
     .then(() => {
       console.log('DATA INSERTED');
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+    Job.insertMany(JOBS)
+    .then(() => {
+      console.log('JOBS INSERTED');
     })
     .catch((e) => {
       console.log(e);
