@@ -105,12 +105,14 @@ const getUserTool = async (toolId, userId) => {
 };
 
 const deleteUserTool = async (toolId, userId) => {
-  const tool = await ToolUser.findOne({ user: userId, tool: toolId }).populate('tool');
-  if (!tool) {
+  const toolUser = await ToolUser.findOne({ user: userId, tool: toolId }).populate('tool');
+
+
+  if (!toolUser) {
     throw new ApiError(httpStatus.NOT_FOUND, 'This user does not have this tool');
   }
-  await tool.remove();
-  return tool;
+  await toolUser.remove();
+  return toolUser.tool.name;
 };
 
 const uploadToolImage = async (file) => {
